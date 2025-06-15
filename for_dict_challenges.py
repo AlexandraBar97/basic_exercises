@@ -58,15 +58,18 @@ school_students = [
     ],
 ]
 
-for students in school_students:
-    names = [name["first_name"] for name in students]
-    names_and_count = {name: names.count(name) for name in names}
-    max_count = max(names_and_count.values())
-
-    for name, count in names_and_count.items():
-        if count == max_count:
+number_group = 0
+for number in school_students:
+    number_group += 1
+    for students in school_students:
+        names = [name["first_name"] for name in students]
+        names_and_count = {name: names.count(name) for name in names}
+        max_count = max(names_and_count.values())
+        for name, count in names_and_count.items():
+            if count == max_count:
+                print(f'Самое частое имя в классе {number_group}: {name}')
               #такая же проблема, как в списках, как передать номер руппы правильно?
-            print(f'Самое частое имя в классе {number_of_class}: {name}')
+        
 
 # Задание 4
 # Для каждого класса нужно вывести количество девочек и мальчиков в нём.
@@ -115,5 +118,26 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
+
+clases = {}
+for group in school:
+    clases[group["class"]] = {"boys_count": 0, "girls_count": 0}
+    boys_count = 0
+    girl_count = 0
+    for student in group['students']:
+        for name in student.values():
+            if is_male.get(name) == False:
+                clases[group["class"]]["girls_count"]+= 1
+            else:
+                clases[group["class"]]["boys_count"] += 1
+
+max_boys = 0
+max_girls = 0
+for clas in clases:
+    if max_boys <= clases[clas]['boys_count']:
+        clas_with_max_boy = clas
+    if max_girls <= clases[clas]['girls_count']:
+        clas_with_max_girl = clas
+print(f'Больше всего мальчиков в классе {clas_with_max_boy}')
+print(f'Больше всего девочек в классе {clas_with_max_girl}')
 
