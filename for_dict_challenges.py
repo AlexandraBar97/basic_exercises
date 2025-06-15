@@ -12,8 +12,9 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
-
+names = [name["first_name"] for name in students]
+for student, count in {name: names.count(name) for name in names}.items():
+    print(f"{student}: {count}")
 
 # Задание 2
 # Дан список учеников, нужно вывести самое часто повторящееся имя
@@ -26,7 +27,12 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
+names = [name["first_name"] for name in students]
+names_and_count = {name: names.count(name) for name in names}
+max_count = max(names_and_count.values())
+for name, count in names_and_count.items():
+    if count == max_count:
+        print(name)
 
 
 # Задание 3
@@ -51,8 +57,16 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
 
+for students in school_students:
+    names = [name["first_name"] for name in students]
+    names_and_count = {name: names.count(name) for name in names}
+    max_count = max(names_and_count.values())
+
+    for name, count in names_and_count.items():
+        if count == max_count:
+              #такая же проблема, как в списках, как передать номер руппы правильно?
+            print(f'Самое частое имя в классе {number_of_class}: {name}')
 
 # Задание 4
 # Для каждого класса нужно вывести количество девочек и мальчиков в нём.
@@ -72,7 +86,17 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
-# ???
+
+boys_count = 0
+girl_count = 0
+for group in school:
+    for student in group['students']:
+        for name in student.values():
+            if is_male.get(name) == False:
+                girl_count += 1
+            else:
+                boys_count += 1
+    print(f'В классе {group["class"]} {girl_count} девочки и {boys_count} мальчика')
 
 
 # Задание 5

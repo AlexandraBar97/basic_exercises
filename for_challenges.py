@@ -46,8 +46,8 @@ groups = [
     ['Вася', 'Маша', 'Саша', 'Женя'],
     ['Оля', 'Петя', 'Гриша'],
 ]
-for group in groups:
-    number_of_groups = len(groups)
+
+number_of_groups = len(groups)
 print(f'Всего {number_of_groups} групп.')
 group_number = 0
 for index, item in enumerate(groups): #здесь у меня проблема с номерами групп
@@ -68,8 +68,8 @@ groups = [
     ['Вася', 'Маша', 'Саша', 'Женя'],
     ['Оля', 'Петя', 'Гриша'],
 ]
-for group in groups:
-    number_of_groups = len(groups)
+
+number_of_groups = len(groups)
 print(f'Всего {number_of_groups} групп.')
 group_number = 0
 for index, item in enumerate(groups): #а здесь у меня проблема с номерами групп и с выводом списка
