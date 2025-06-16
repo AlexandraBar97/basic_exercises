@@ -50,11 +50,8 @@ groups = [
 number_of_groups = len(groups)
 print(f'Всего {number_of_groups} групп.')
 group_number = 0
-for index, item in enumerate(groups): #здесь у меня проблема с номерами групп
-    group_number += index
-for group in groups:
-    number_of_people = len(group)
-    print(f'Группа {group_number}: {number_of_people} человек.')
+for group_number, group in enumerate(groups, start = 1):
+    print(f'Группа {group_number}: {len(group)} ученика.')
 
 
 # Задание 5
@@ -72,6 +69,6 @@ groups = [
 number_of_groups = len(groups)
 print(f'Всего {number_of_groups} групп.')
 group_number = 0
-for index, item in enumerate(groups): #а здесь у меня проблема с номерами групп и с выводом списка
-    group_number += index
-    print(f'Группа {group_number}: {item}.')
+for group_number, group in enumerate(groups, start = 1):
+    names_string = ', '.join(group)
+    print(f'Группа {group_number}: {names_string}.')
