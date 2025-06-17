@@ -12,8 +12,21 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
 
+names = {}
+for student in students:
+    name = student['first_name']
+    if name in names:
+        names[name] += 1
+    else:
+        names[name] = 1
+        #print(names)
+for student, count in names.items():
+    print(f"{student}: {count}")
+
+""" names = [name["first_name"] for name in students]
+for student, count in {name: names.count(name) for name in names}.items():
+    print(f"{student}: {count}") """
 
 # Задание 2
 # Дан список учеников, нужно вывести самое часто повторящееся имя
@@ -26,8 +39,25 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
+""" names = [name["first_name"] for name in students]
+names_and_count = {name: names.count(name) for name in names}
+max_count = max(names_and_count.values())
+for name, count in names_and_count.items():
+    if count == max_count:
+        print(name) """
 
+names = []
+for name in students:
+    names = name['first_name']
+    #print(names)
+names = [name["first_name"] for name in students]
+#print(names)
+names_and_count = {name: names.count(name) for name in names}
+#print(names_and_count)
+max_count = max(names_and_count.values())
+for name, count in names_and_count.items():
+    if count == max_count:
+        print(name)
 
 # Задание 3
 # Есть список учеников в нескольких классах, нужно вывести самое частое имя в каждом классе.
@@ -51,8 +81,18 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
 
+number_group = 0
+for number_group, group in enumerate(school_students, start=1):
+    for students in school_students:
+        names = [name["first_name"] for name in students]
+        names_and_count = {name: names.count(name) for name in names}
+        max_count = max(names_and_count.values())
+        for name, count in names_and_count.items():
+            if count == max_count:
+                print(f'Самое частое имя в классе {number_group}: {name}')
+#переделала подсчет классов, как в списках, но теперь не могу понять, куда вставить это, потому что цикл проходит аж 9 итераций
+        
 
 # Задание 4
 # Для каждого класса нужно вывести количество девочек и мальчиков в нём.
@@ -72,7 +112,17 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
-# ???
+
+for group in school:
+    boys_count = 0
+    girl_count = 0
+    for student in group['students']:
+        for name in student.values():
+            if is_male.get(name) == False:
+                girl_count += 1
+            else:
+                boys_count += 1
+    print(f'В классе {group["class"]} {girl_count} девочки и {boys_count} мальчика')
 
 
 # Задание 5
@@ -91,5 +141,26 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
+
+clases = {}
+for group in school:
+    clases[group["class"]] = {"boys_count": 0, "girls_count": 0} #вот тут, мне кажется, ошибка, в конце получается неправильный результат
+    boys_count = 0
+    girl_count = 0
+    for student in group['students']:
+        for name in student.values():
+            if is_male.get(name) == False:
+                clases[group["class"]]["girls_count"]+= 1
+            else:
+                clases[group["class"]]["boys_count"] += 1
+
+max_boys = 0
+max_girls = 0
+for clas in clases:
+    if max_boys <= clases[clas]['boys_count']:
+        clas_with_max_boy = clas
+    if max_girls <= clases[clas]['girls_count']:
+        clas_with_max_girl = clas
+print(f'Больше всего мальчиков в классе {clas_with_max_boy}')
+print(f'Больше всего девочек в классе {clas_with_max_girl}')
 
